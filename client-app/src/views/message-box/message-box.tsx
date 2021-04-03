@@ -21,7 +21,6 @@ const MessageBox: React.FC<Props> = () => {
   const handleChange = (e: any) => {
     setText(e.target.value);
   };
-  console.log(state);
 
   return (
     <div>

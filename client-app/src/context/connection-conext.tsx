@@ -34,8 +34,8 @@ type Context = {
 function useClientReducer(state: State, action: Action): State {
   switch (action.type) {
     case "message":
-      state.messages.push(JSON.parse(action.payload));
-      return { ...state };
+      let list = state.messages.concat(JSON.parse(action.payload));
+      return { ...state, messages: list };
     case "send-message":
       client.send(JSON.stringify(action.payload));
       return state;
@@ -53,6 +53,7 @@ const connectionHandler = (dispatch: any) => {
 const ConnectionProvider: React.FC = ({ children }) => {
   const [state, dispatch] = React.useReducer(useClientReducer, initialState);
   React.useEffect(() => connectionHandler(dispatch), []);
+
   return (
     <ConnectionContext.Provider
       value={{
