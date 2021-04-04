@@ -4,10 +4,7 @@ import { w3cwebsocket as W3CWebSocket } from "websocket";
 const initialState = {
   messages: [],
 };
-const client = new W3CWebSocket(`ws://localhost:8999`);
-client.onopen = () => {
-  console.log("WebSocket Client Connected");
-};
+var client: W3CWebSocket;
 const ConnectionContext = React.createContext<Context>({
   dispatch: () => {},
   state: initialState,
@@ -45,6 +42,10 @@ function useClientReducer(state: State, action: Action): State {
 }
 
 const connectionHandler = (dispatch: any) => {
+  client = new W3CWebSocket(`ws://localhost:8000?roomId=3600`);
+  client.onopen = (): void => {
+    console.log("WebSocket Client Connected");
+  };
   client.onmessage = (message) => {
     dispatch({ type: "message", payload: message.data });
   };
