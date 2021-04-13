@@ -19,13 +19,13 @@ const Footer = (props) => {
     <div {...rest} className={clsx(classes.root, className)}>
       <Typography variant="body1">&copy; | 2021 Anonymous Chat</Typography>
       <Typography variant="caption">
-        A Product of{" "}
+        A Project of{" "}
         <Link
           component="a"
-          href="https://www.aptusdatalabs.com/"
-          target="_blank"
+          // href="https://"
+          // target="_blank"
         >
-          Aptus Data Labs
+          Prayas Agrawal
         </Link>
       </Typography>
     </div>

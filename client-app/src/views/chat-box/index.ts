@@ -1,1 +1,1 @@
-export { default } from "./message-box";
+export { default } from "./chat-box";

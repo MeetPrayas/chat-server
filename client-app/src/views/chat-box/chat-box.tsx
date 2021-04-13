@@ -16,7 +16,7 @@ interface Message {
 }
 interface Props {}
 
-const MessageBox: React.FC<Props> = () => {
+const ChatBox: React.FC<Props> = () => {
   const { state, dispatch } = useConnection();
   const [text, setText] = React.useState<string>("");
   const onClickhandle = (type: string) => {
@@ -65,4 +65,4 @@ const MessageBox: React.FC<Props> = () => {
   );
 };
 
-export default MessageBox;
+export default ChatBox;
