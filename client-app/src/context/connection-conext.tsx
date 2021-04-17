@@ -48,7 +48,7 @@ type connection = {
 const connectionHandler = ({ dispatch, name, roomId, type }: connection) => {
   if (client) client.close();
   client = new W3CWebSocket(
-    `ws://localhost:8000?name=${name}&type=${type}&roomId=${roomId}`
+    `ws://192.168.29.87:8000?name=${name}&type=${type}&roomId=${roomId}`
   );
   client.onopen = (): void => {
     console.log("WebSocket Client Connected");

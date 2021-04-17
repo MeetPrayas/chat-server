@@ -2,18 +2,18 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/styles";
 import { Outlet } from "react-router-dom";
-import { Sidebar, Topbar, Footer } from "./components";
+import { Topbar } from "./components";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     paddingTop: 56,
     height: "100%",
     [theme.breakpoints.up("sm")]: {
-      paddingTop: 64,
+      paddingTop: 56,
     },
   },
   content: {
-    minHeight: "85%",
+    height: "100%",
     padding: 10,
   },
 }));
@@ -28,11 +28,9 @@ const Main = (props) => {
   return (
     <div className={classes.root}>
       <Topbar handleSidebar={handleSidebar} />
-      {/* <Sidebar onClose={handleSidebar} open={openSidebar} /> */}
       <main className={classes.content}>
         <Outlet />
       </main>
-      <Footer />
     </div>
   );
 };

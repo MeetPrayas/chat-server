@@ -22,43 +22,77 @@ wss.getUniqueID = function () {
 };
 
 wss.on("connection", (ws, req) => {
-  console.log(req.url);
   const parameters = url.parse(req.url, true);
   ws.isAlive = true;
-  ws.id = wss.getUniqueID();
+  // ws.id = wss.getUniqueID();
   ws.name = parameters.query.name;
-  ws.chatroom = {
-    role: parameters.query.role,
-    roomid: parameters.query.id,
-  };
+  ws.type = ["hostRoom", "joinRoom"].includes(parameters.query.type)
+    ? "private"
+    : "public";
+  ws.roomid = parameters.query.id;
+
   ws.on("pong", () => {
     ws.isAlive = true;
   });
-  ws.send(JSON.stringify("you are connected with server"));
+  ws.on("open", function open() {
+    console.log("connected");
+  });
+
+  // ws.on("close", function close() {
+  //   console.log("disconnected");
+  // });
   ws.on("message", (clientMessage) => {
-    console.log(clientMessage);
     message = JSON.parse(clientMessage);
     //send back the message to the other clients
-    wss.clients.forEach((client) => {
-      if (client != ws) {
-        client.send(
-          JSON.stringify({ name: client.name, message: message.note })
-        );
-      } else {
-        client.send(JSON.stringify({ name: "you", message: message.note }));
-      }
-    });
+    if (ws.type == "private") {
+      wss.clients.forEach((client) => {
+        {
+          if (client.roomid === ws.roomid) {
+            if (client != ws) {
+              client.send(
+                JSON.stringify({ name: ws.name, message: message.note })
+              );
+            } else {
+              client.send(
+                JSON.stringify({ name: "you", message: message.note })
+              );
+            }
+          }
+        }
+      });
+    } else {
+      wss.clients.forEach((client) => {
+        {
+          if (client.type === "public") {
+            if (client != ws) {
+              client.send(
+                JSON.stringify({ name: ws.name, message: message.note })
+              );
+            } else {
+              client.send(
+                JSON.stringify({ name: "you", message: message.note })
+              );
+            }
+          }
+        }
+      });
+    }
   });
+
   //send immediatly a feedback to the incoming connection
 });
 
-setInterval(() => {
+const interval = setInterval(() => {
   wss.clients.forEach((ws) => {
     if (!ws.isAlive) return ws.terminate();
     ws.isAlive = false;
     ws.ping(null, false, true);
   });
-}, 10000);
+}, 20000);
+
+wss.on("close", function close() {
+  clearInterval(interval);
+});
 
 //start our server
 server.listen(process.env.PORT || 8000, () => {
