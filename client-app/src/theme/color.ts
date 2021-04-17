@@ -26,4 +26,4 @@ export const color = [
   "Plum",
   "Olive",
   "Cyan",
-];
+]

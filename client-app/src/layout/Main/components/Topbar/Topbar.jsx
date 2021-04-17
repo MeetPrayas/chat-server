@@ -1,9 +1,9 @@
-import React from "react";
-import { Typography } from "@material-ui/core";
+import React from "react"
+import { Typography } from "@material-ui/core"
 //material components
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import { makeStyles } from "@material-ui/styles";
+import AppBar from "@material-ui/core/AppBar"
+import Toolbar from "@material-ui/core/Toolbar"
+import { makeStyles } from "@material-ui/styles"
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,9 +20,9 @@ const useStyles = makeStyles((theme) => ({
     width: "85px",
     height: "50px",
   },
-}));
+}))
 function Topbar({ handleSidebar }) {
-  const classes = useStyles();
+  const classes = useStyles()
 
   return (
     <>
@@ -32,7 +32,7 @@ function Topbar({ handleSidebar }) {
         </Toolbar>
       </AppBar>
     </>
-  );
+  )
 }
 
-export default Topbar;
+export default Topbar

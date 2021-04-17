@@ -1,10 +1,10 @@
-import * as React from "react";
-import { useConnection } from "../../context/connection-conext";
-import Typography from "@material-ui/core/Typography";
-import Box from "@material-ui/core/Box";
-import Paper from "@material-ui/core/Paper";
-import Send from "./components/send";
-import { makeStyles } from "@material-ui/core/styles";
+import * as React from "react"
+import { useConnection } from "../../context/connection-conext"
+import Typography from "@material-ui/core/Typography"
+import Box from "@material-ui/core/Box"
+import Paper from "@material-ui/core/Paper"
+import Send from "./components/send"
+import { makeStyles } from "@material-ui/core/styles"
 
 const useStyles = makeStyles({
   sender: {
@@ -31,7 +31,7 @@ const useStyles = makeStyles({
     padding: "10px 25px 0 25px",
   },
   box: {},
-});
+})
 
 //props
 //hooks
@@ -40,25 +40,25 @@ const useStyles = makeStyles({
 interface Props {}
 
 const AlwaysScrollToBottom = () => {
-  const elementRef = React.useRef<any>();
-  React.useEffect(() => elementRef.current.scrollIntoView());
-  return <div ref={elementRef} />;
-};
+  const elementRef = React.useRef<any>()
+  React.useEffect(() => elementRef.current.scrollIntoView())
+  return <div ref={elementRef} />
+}
 
 const ChatBox: React.FC<Props> = () => {
-  const { state, dispatch } = useConnection();
-  const [text, setText] = React.useState<string>("");
-  const classes = useStyles();
+  const { state, dispatch } = useConnection()
+  const [text, setText] = React.useState<string>("")
+  const classes = useStyles()
 
   const onSend = (type: string) => {
     if (text.trim()) {
-      dispatch({ type: type, payload: { name: "prayas", note: text.trim() } });
-      setText("");
+      dispatch({ type: type, payload: { name: "prayas", note: text.trim() } })
+      setText("")
     }
-  };
+  }
   const handleChange = (e: any) => {
-    setText(e.target.value);
-  };
+    setText(e.target.value)
+  }
 
   return (
     <React.Fragment>
@@ -85,13 +85,13 @@ const ChatBox: React.FC<Props> = () => {
               </Typography>
             )
             // </Box>
-          );
+          )
         })}
         <AlwaysScrollToBottom />
       </Paper>
       <Send text={text} handleChange={handleChange} onSend={onSend} />
     </React.Fragment>
-  );
-};
+  )
+}
 
-export default ChatBox;
+export default ChatBox

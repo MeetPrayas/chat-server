@@ -1,15 +1,15 @@
-import * as React from "react";
-import Container from "@material-ui/core/Container";
-import Grid from "@material-ui/core/Grid";
-import Checkbox from "@material-ui/core/Checkbox";
-import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
-import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
-import { useConnection } from "../../context/connection-conext";
-import FormControl from "@material-ui/core/FormControl";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import FormHelperText from "@material-ui/core/FormHelperText";
-import { useNavigate } from "react-router-dom";
+import * as React from "react"
+import Container from "@material-ui/core/Container"
+import Grid from "@material-ui/core/Grid"
+import Checkbox from "@material-ui/core/Checkbox"
+import TextField from "@material-ui/core/TextField"
+import Button from "@material-ui/core/Button"
+import { makeStyles, createStyles, Theme } from "@material-ui/core/styles"
+import { useConnection } from "../../context/connection-conext"
+import FormControl from "@material-ui/core/FormControl"
+import FormControlLabel from "@material-ui/core/FormControlLabel"
+import FormHelperText from "@material-ui/core/FormHelperText"
+import { useNavigate } from "react-router-dom"
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -27,8 +27,8 @@ const useStyles = makeStyles((theme: Theme) =>
       textAlign: "center",
       margin: 0,
     },
-  })
-);
+  }),
+)
 
 interface Props {}
 const initialError = {
@@ -48,29 +48,29 @@ const initialError = {
     status: false,
     message: "",
   },
-};
+}
 
 const Home: React.FC<Props> = () => {
-  const [accept, setAccept] = React.useState(false);
+  const [accept, setAccept] = React.useState(false)
   const [state, setState] = React.useState({
     name: "",
     roomId: "",
-  });
-  const { dispatch } = useConnection();
-  const [error, setError] = React.useState(initialError);
-  const classes = useStyles();
-  let navigate = useNavigate();
+  })
+  const { dispatch } = useConnection()
+  const [error, setError] = React.useState(initialError)
+  const classes = useStyles()
+  let navigate = useNavigate()
 
   const handleChange = (e: any) => {
     setState({
       ...state,
       [e.target.id]: e.target.value,
-    });
-  };
+    })
+  }
 
   let navigateTO = (path: string) => {
-    navigate(path);
-  };
+    navigate(path)
+  }
   const handleClick = (type: string) => {
     if (accept) {
       if (["joinGlobalChat", "hostRoom"].includes(type)) {
@@ -81,11 +81,11 @@ const Home: React.FC<Props> = () => {
               status: true,
               message: "Please Enter your Name",
             },
-          });
+          })
         } else {
           setError({
             ...initialError,
-          });
+          })
           dispatch({
             type: "set-up",
             payload: {
@@ -93,7 +93,7 @@ const Home: React.FC<Props> = () => {
               type: type,
               roomId: "",
             },
-          });
+          })
           dispatch({
             type: "connect",
             payload: {
@@ -103,7 +103,7 @@ const Home: React.FC<Props> = () => {
               roomId: "",
               navigateTO: navigateTO,
             },
-          });
+          })
         }
       } else if (type === "joinRoom") {
         if (!state.name) {
@@ -113,7 +113,7 @@ const Home: React.FC<Props> = () => {
               status: true,
               message: "Please Enter your Name",
             },
-          });
+          })
         } else if (state.roomId.length !== 12) {
           setError({
             ...initialError,
@@ -121,11 +121,11 @@ const Home: React.FC<Props> = () => {
               status: true,
               message: "Please Enter a Valid RoomID",
             },
-          });
+          })
         } else {
           setError({
             ...initialError,
-          });
+          })
           dispatch({
             type: "connect",
             payload: {
@@ -135,7 +135,7 @@ const Home: React.FC<Props> = () => {
               roomId: state.roomId,
               navigateTO: navigateTO,
             },
-          });
+          })
         }
       }
     } else {
@@ -145,31 +145,26 @@ const Home: React.FC<Props> = () => {
           status: true,
           message: "Please accept to proceed.",
         },
-      });
+      })
     }
-  };
+  }
   return (
     <React.Fragment>
       <Container>
         <Grid container spacing={2}>
           <Grid item xs={6}>
             <ul>
-              This is a platform to communicate with other person. Everyone
-              participating in the application is encoraged to abide by the
-              following instructions:
+              This is a platform to communicate with other person. Everyone participating in the
+              application is encoraged to abide by the following instructions:
               <li>Donot use offensive word</li>
             </ul>
-            <FormControl
-              required
-              error={error.accept.status}
-              component="fieldset"
-            >
+            <FormControl required error={error.accept.status} component="fieldset">
               <FormControlLabel
                 control={
                   <Checkbox
                     checked={accept}
                     onChange={() => {
-                      setAccept(!accept);
+                      setAccept(!accept)
                     }}
                     name="checkedB"
                     color="primary"
@@ -193,7 +188,7 @@ const Home: React.FC<Props> = () => {
                 color="primary"
                 variant="contained"
                 onClick={() => {
-                  handleClick("joinGlobalChat");
+                  handleClick("joinGlobalChat")
                 }}
               >
                 Join Global chat
@@ -203,7 +198,7 @@ const Home: React.FC<Props> = () => {
                 color="primary"
                 variant="contained"
                 onClick={() => {
-                  handleClick("hostRoom");
+                  handleClick("hostRoom")
                 }}
               >
                 Host room
@@ -220,7 +215,7 @@ const Home: React.FC<Props> = () => {
                 color="primary"
                 variant="contained"
                 onClick={() => {
-                  handleClick("joinRoom");
+                  handleClick("joinRoom")
                 }}
               >
                 Join Room
@@ -230,7 +225,7 @@ const Home: React.FC<Props> = () => {
         </Grid>
       </Container>
     </React.Fragment>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home

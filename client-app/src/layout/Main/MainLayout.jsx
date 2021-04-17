@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import PropTypes from "prop-types";
-import { makeStyles } from "@material-ui/styles";
-import { Outlet } from "react-router-dom";
-import { Topbar } from "./components";
+import React, { useState } from "react"
+import PropTypes from "prop-types"
+import { makeStyles } from "@material-ui/styles"
+import { Outlet } from "react-router-dom"
+import { Topbar } from "./components"
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -16,14 +16,14 @@ const useStyles = makeStyles((theme) => ({
     height: "100%",
     padding: 10,
   },
-}));
+}))
 
 const Main = (props) => {
-  const classes = useStyles();
-  const [openSidebar, setOpenSidebar] = useState(false);
+  const classes = useStyles()
+  const [openSidebar, setOpenSidebar] = useState(false)
   const handleSidebar = () => {
-    setOpenSidebar((old) => (old ? false : true));
-  };
+    setOpenSidebar((old) => (old ? false : true))
+  }
 
   return (
     <div className={classes.root}>
@@ -32,11 +32,11 @@ const Main = (props) => {
         <Outlet />
       </main>
     </div>
-  );
-};
+  )
+}
 
 Main.propTypes = {
   children: PropTypes.node,
-};
+}
 
-export default Main;
+export default Main

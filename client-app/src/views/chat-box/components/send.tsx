@@ -1,15 +1,15 @@
-import React from "react";
-import IconButton from "@material-ui/core/IconButton";
-import Tooltip from "@material-ui/core/Tooltip";
-import SendIcon from "@material-ui/icons/Send";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import TextField from "@material-ui/core/TextField";
+import React from "react"
+import IconButton from "@material-ui/core/IconButton"
+import Tooltip from "@material-ui/core/Tooltip"
+import SendIcon from "@material-ui/icons/Send"
+import InputAdornment from "@material-ui/core/InputAdornment"
+import TextField from "@material-ui/core/TextField"
 
 type Props = {
-  text: string;
-  handleChange: (e: any) => void;
-  onSend: (type: string) => void;
-};
+  text: string
+  handleChange: (e: any) => void
+  onSend: (type: string) => void
+}
 const Send = ({ text, handleChange, onSend }: Props) => {
   return (
     <div>
@@ -18,7 +18,7 @@ const Send = ({ text, handleChange, onSend }: Props) => {
         type="text"
         onChange={handleChange}
         onKeyPress={(e) => {
-          if (e.key === "Enter") onSend("send-message");
+          if (e.key === "Enter") onSend("send-message")
         }}
         style={{ width: "80%", margin: "0 10%" }}
         autoFocus
@@ -35,7 +35,7 @@ const Send = ({ text, handleChange, onSend }: Props) => {
         }}
       />
     </div>
-  );
-};
+  )
+}
 
-export default Send;
+export default Send
