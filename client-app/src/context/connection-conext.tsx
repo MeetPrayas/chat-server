@@ -1,6 +1,6 @@
 import * as React from "react"
 import { w3cwebsocket as W3CWebSocket } from "websocket"
-const host = "ws://localhost:8000"
+const host = "ws://18.220.154.108:8000"
 const initialState = {
   messages: [],
   setUp: {
