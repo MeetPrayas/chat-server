@@ -95,6 +95,6 @@ wss.on("close", function close() {
 });
 
 //start our server
-server.listen(process.env.PORT || 8000, () => {
+server.listen(process.env.PORT || 53, () => {
   console.log(`Server started on port ${server.address().port} :)`);
 });
