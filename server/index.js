@@ -82,17 +82,17 @@ wss.on("connection", (ws, req) => {
   //send immediatly a feedback to the incoming connection
 });
 
-// const interval = setInterval(() => {
-//   wss.clients.forEach((ws) => {
-//     if (!ws.isAlive) return ws.terminate();
-//     ws.isAlive = false;
-//     // ws.ping(null, false, true);
-//   });
-// }, 20000);
+const interval = setInterval(() => {
+  wss.clients.forEach((ws) => {
+    if (!ws.isAlive) return ws.terminate();
+    ws.isAlive = false;
+    ws.ping(null, false, true);
+  });
+}, 20000);
 
-// wss.on("close", function close() {
-//   clearInterval(interval);
-// });
+wss.on("close", function close() {
+  clearInterval(interval);
+});
 
 //start our server
 server.listen(process.env.PORT || 8000, () => {
