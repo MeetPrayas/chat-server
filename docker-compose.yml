@@ -4,21 +4,10 @@ services:
   server:
     container_name: server
     build:
-      context: ./server
+      context: .
       dockerfile: ./Dockerfile
     image: server
     ports:
       - "8000:8000"
     expose:
       - "8000"
-
-  client:
-    container_name: client
-    build:
-      context: ./client-app
-      dockerfile: ./Dockerfile
-    image: client
-    ports:
-      - "3000:3000"
-    expose:
-      - "3000"
