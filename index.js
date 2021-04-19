@@ -22,7 +22,9 @@ wss.getUniqueID = function () {
 };
 
 wss.on("connection", (ws, req) => {
+  console.log("before parse");
   const parameters = url.parse(req.url, true);
+  console.log("after parse");
   ws.isAlive = true;
   // ws.id = wss.getUniqueID();
   ws.name = parameters.query.name;
