@@ -9,7 +9,7 @@ const app = express();
 const server = http.createServer(app);
 
 //initialize the WebSocket server instance
-const wss = new WebSocket.Server({ server: server, path: "/" });
+const wss = new WebSocket.Server({ server: server, path: "/socket" });
 
 // generate a unique ID
 wss.getUniqueID = function () {
