@@ -5,6 +5,9 @@ var url = require("url");
 
 const app = express();
 
+app.get("/", (req, res) => {
+  res.send("Hello World!");
+});
 //initialize a simple http server
 const server = http.createServer(app);
 
