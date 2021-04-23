@@ -33,7 +33,7 @@ wss.on("connection", (ws, req) => {
   ws.type = ["hostRoom", "joinRoom"].includes(parameters.query.type)
     ? "private"
     : "public";
-  ws.roomid = parameters.query.id;
+  ws.roomId = parameters.query.roomId;
 
   ws.on("pong", () => {
     ws.isAlive = true;
@@ -48,9 +48,9 @@ wss.on("connection", (ws, req) => {
   ws.on("message", (clientMessage) => {
     message = JSON.parse(clientMessage);
     //send back the message to the other clients
-    if (ws.type == "private") {
+    if (ws.type === "private") {
       wss.clients.forEach((client) => {
-        if (client.roomid === ws.roomid && client != ws) {
+        if (client.roomId === ws.roomId && client != ws) {
           client.send(JSON.stringify({ name: ws.name, message: message.note }));
         }
       });
