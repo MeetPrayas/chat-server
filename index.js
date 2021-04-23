@@ -8,6 +8,7 @@ const app = express();
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });
+
 //initialize a simple http server
 const server = http.createServer(app);
 
@@ -49,37 +50,18 @@ wss.on("connection", (ws, req) => {
     //send back the message to the other clients
     if (ws.type == "private") {
       wss.clients.forEach((client) => {
-        {
-          if (client.roomid === ws.roomid) {
-            if (client != ws) {
-              client.send(
-                JSON.stringify({ name: ws.name, message: message.note })
-              );
-            } else {
-              client.send(
-                JSON.stringify({ name: "you", message: message.note })
-              );
-            }
-          }
+        if (client.roomid === ws.roomid && client != ws) {
+          client.send(JSON.stringify({ name: ws.name, message: message.note }));
         }
       });
     } else {
       wss.clients.forEach((client) => {
-        {
-          if (client.type === "public") {
-            if (client != ws) {
-              client.send(
-                JSON.stringify({ name: ws.name, message: message.note })
-              );
-            } else {
-              client.send(
-                JSON.stringify({ name: "you", message: message.note })
-              );
-            }
-          }
+        if (client.type === "public" && client != ws) {
+          client.send(JSON.stringify({ name: ws.name, message: message.note }));
         }
       });
     }
+    ws.send(JSON.stringify({ name: "you", message: message.note }));
   });
 
   //send immediatly a feedback to the incoming connection
